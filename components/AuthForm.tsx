@@ -4,6 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import Image from "next/image";
 import Link from "next/link";
+import FormField from "@/components/FormField";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
@@ -54,7 +55,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
       <div className="flex flex-col gap-6 card py-4 px-10">
         <div className="flex flex-row gap-2 justify-center">
           <Image src="/logo.svg" alt="logo" width={38} height={32} />
-          <h2 className="text-primary-100">PrepInterview</h2>
+          <h2 className="text-primary-100">PrepTalk</h2>
         </div>
 
         <h3>Practice job interview with AI</h3>
@@ -63,9 +64,28 @@ const AuthForm = ({ type }: { type: FormType }) => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full space-y-6 mt-4 form"
           >
-            {!isSignIn && <p>Name</p>}
-            <p>Email</p>
-            <p>Password</p>
+            {!isSignIn && (
+              <FormField
+                control={form.control}
+                name="name"
+                label="Name"
+                placeholder="Your Name"
+              />
+            )}
+            <FormField
+              control={form.control}
+              name="email"
+              label="Email"
+              placeholder="Your email address"
+              type="email"
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              label="Password"
+              placeholder="Enter your password"
+              type="password"
+            />
 
             <Button className="btn" type="submit">
               {isSignIn ? "Sign in" : "Create an Account"}
