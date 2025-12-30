@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { dummyInterviews } from "@/constants";
+import InterviewCard from "@/components/InterviewCard";
+import { int } from "zod/v4-mini";
 
 const page = () => {
   return (
@@ -25,15 +27,18 @@ const page = () => {
 
         <div className="interviews-section">
           {dummyInterviews.map((interview) => (
-            <InterviewCard />
+            <InterviewCard {...interview} key={interview.id} />
           ))}
+          {/* <p>You haven&apos;t taken any interviews yet</p> */}
         </div>
       </section>
 
       <section className="flex flex-col gap-6 mt-8">
         <h2>Take an Interview</h2>
         <div className="interviews-section">
-          <p>There are no interviews available</p>
+          {dummyInterviews.map((interview) => (
+            <InterviewCard {...interview} key={interview.id} />
+          ))}
         </div>
       </section>
     </>
